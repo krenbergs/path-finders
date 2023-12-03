@@ -8,8 +8,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    environment = generate_3d_environment(size=20, seed=random.random()*1000)
-    return render_template("index.html", coordinates=environment)
+    environment = generate_3d_environment(size=10, seed=random.random()*1000)
+    path=[]
+    return render_template("index.html", coordinates=environment, red_cube_coords=path)
 
 
 def generate_3d_maze(n):

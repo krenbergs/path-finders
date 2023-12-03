@@ -25,7 +25,7 @@ function createCube(position, color, edgeColor) {
 	cube.add( line );
 }
 
-camera.position.z = 5;
+camera.position.z = 25;
 
 function animate() {
 	requestAnimationFrame( animate );
