@@ -12,7 +12,7 @@ def home():
     start=[0,0,0]
     goal=[9,9,9]
     environment = generate_3d_environment(size=10, seed=random.random()*1000, start=start, goal=goal)
-    path=[]
+    path=astar.astar(start, goal, environment)
     return render_template("index.html", coordinates=environment, red_cube_coords=path, start=start, goal=goal)
 
 
