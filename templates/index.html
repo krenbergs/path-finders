@@ -16,6 +16,10 @@
           </script>
     </head>
     <body>
-        <script type="module" src="/static/cube.mjs"></script>
+        <script type="module">
+            const cubeCoordinates = JSON.parse('{{ coordinates|tojson }}');
+            import cube from "/static/cube.mjs";
+            cube(cubeCoordinates, 0xaaaaaa, 0x888888);
+        </script>    
     </body>
 </html>
