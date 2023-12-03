@@ -18,9 +18,13 @@
     <body>
         <script type="module">
             const cubeCoordinates = JSON.parse('{{ coordinates|tojson }}');
+            const start = JSON.parse('{{ start|tojson }}');
+            const goal = JSON.parse('{{ goal|tojson }}');
             const redCubeCoordinates = JSON.parse('{{ red_cube_coords|tojson }}');
             import cube from "/static/cube.mjs";
             cube(cubeCoordinates, 0xaaaaaa, 0x888888);
+            cube([start], 0x00ff00, 0x888888);
+            cube([goal], 0x00ff00, 0x888888);
             cube(redCubeCoordinates, 0xff0000, 0x888888);
         </script>  
     </body>

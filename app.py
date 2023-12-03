@@ -3,14 +3,17 @@ from flask import render_template
 import random
 import numpy as np
 import noise
+import astar
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    environment = generate_3d_environment(size=10, seed=random.random()*1000)
+    start=[0,0,0]
+    goal=[9,9,9]
+    environment = generate_3d_environment(size=10, seed=random.random()*1000, start=start, goal=goal)
     path=[]
-    return render_template("index.html", coordinates=environment, red_cube_coords=path)
+    return render_template("index.html", coordinates=environment, red_cube_coords=path, start=start, goal=goal)
 
 
 def generate_3d_maze(n):
@@ -26,7 +29,7 @@ def generate_3d_maze(n):
     
     return walls
 
-def generate_3d_environment(size, scale=0.1, octaves=6, persistence=0.5, lacunarity=2.0, height_threshold=0.0, seed=0):
+def generate_3d_environment(size, scale=0.1, octaves=6, persistence=0.5, lacunarity=2.0, height_threshold=0.0, seed=0, start=[0,0,0], goal=[20,20,20]):
     # Create a 3D grid of coordinates in the range of 0 to n
     x = np.linspace(0, size, size)
     y = np.linspace(0, size, size)
@@ -48,5 +51,10 @@ def generate_3d_environment(size, scale=0.1, octaves=6, persistence=0.5, lacunar
                 # Only include points that are above the height threshold
                 if perlin_noise[i][j][k] > height_threshold:
                     environment.append([i, j, k])
+
+    if (start in environment):
+        environment.remove(start)
+    if (goal in environment):
+        environment.remove(goal)
 
     return environment
